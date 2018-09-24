@@ -41,10 +41,10 @@ venv.bak/
 .spyproject
 
 # Pickle files
-*.pkl
+# *.pkl
 
 # H5 Files
-*.h5
+# *.h5
 
 # End of https://www.gitignore.io/api/python
 
