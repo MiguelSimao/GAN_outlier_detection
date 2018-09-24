@@ -1,11 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+tests_discriminator.py
+
+Script to run the GAN discriminator tests for the UC2018 DualMyo data set.
+Must change «id_test» value on line 44 to select test to run.
+
+Author: Miguel Simão (miguel.simao@uc.pt)
+"""
+
 # imports
 import numpy as np
-import time
 import pickle
 from tools import toolsfeatures
-from tools.postprocessing import PostProcessor
 
-from sklearn import preprocessing, metrics
+from sklearn import metrics
 import matplotlib.pyplot as plt
 
 # ENSURE REPRODUCIBILITY ######################################################
@@ -153,11 +162,10 @@ def build_discriminator():
 #%% Train/retrain network if necessary
 
 if par_retrain:
-#    discriminator = keras.models.load_model('./nets/untrained_discriminator.h5')
-#    discriminator = build_discriminator()
+
     try:
-        discriminator.fit(X_train, [o_train, t_train], #[o_train, t_train]
-                          validation_data=(X_val, [o_val, t_val]), #[o_val, t_val]
+        discriminator.fit(X_train, [o_train, t_train],
+                          validation_data=(X_val, [o_val, t_val]),
                           callbacks=[keras.callbacks.
                                      EarlyStopping('val_loss',
                                                    patience=12)],
@@ -412,44 +420,3 @@ rec_090 = metrics.recall_score(t_test_ind, yt_test_ind, average=None)
 print('Precision','Recall','Precision','Recall','Precision','Recall')
 for i in range(len(prec_000)):
     print(prec_000[i], rec_000[i],prec_095[i], rec_095[i],prec_090[i], rec_090[i])
-
-#%% OLDER CODE
-
-
-
-"""
-def accuracy(net, X, t):
-    y = discriminator.predict(X)[1]
-    return sum(y.argmax(axis=1)==t.argmax(axis=1))/len(y) * 100
-
-
-
-print('Classification accuracy (no threshold):')
-print(' Train: %.2f%%' % (accuracy(discriminator, X_train, t_train)))
-print('   Val: %.2f%%' % (accuracy(discriminator, X_val, t_val)))
-print('  Test: %.2f%%' % (accuracy(discriminator, X_test, t_test)))
-print('Others: %.2f%%' % (accuracy(discriminator, X_others, t_others)))
-perf_class[0,0] = accuracy(discriminator, X_train, t_train)
-perf_class[0,1] = accuracy(discriminator, X_val, t_val)
-perf_class[0,2] = accuracy(discriminator, X_test, t_test)
-perf_class[0,3] = accuracy(discriminator, X_others, t_others)
-
-def accuracy_p(net, X, t, threshold):
-    y = discriminator.predict(X)[1]
-    yind = np.argmax(y, axis=1)
-    ymax = np.max(y, axis=1)
-    yind[ymax<threshold] = 7
-    return sum(yind==t.argmax(axis=1))/len(y) * 100
-
-for i,p in enumerate(thresholds):
-    print('With outlier threshold %.2f:' % (p) )
-    print(' Train: %.2f%%' % (accuracy_p(discriminator, X_train, t_train, p)))
-    print('   Val: %.2f%%' % (accuracy_p(discriminator, X_val, t_val, p)))
-    print('  Test: %.2f%%' % (accuracy_p(discriminator, X_test, t_test, p)))
-    print('Others: %.2f%%' % (accuracy_p(discriminator, X_others, t_others, p)))
-    perf_threshold[i,0] = accuracy_p(discriminator, X_train, t_train, p)
-    perf_threshold[i,1] = accuracy_p(discriminator, X_val, t_val, p)
-    perf_threshold[i,2] = accuracy_p(discriminator, X_test, t_test, p)
-    perf_threshold[i,3] = accuracy_p(discriminator, X_others, t_others, p)
-
-"""

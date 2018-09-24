@@ -1,11 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+tests_generator.py
+
+Script to run the GAN generator tests for the UC2018 DualMyo data set.
+
+Author: Miguel Simão (miguel.simao@uc.pt)
+"""
+
 # imports
 import numpy as np
 import pickle
 
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
-import ganmetrics
-import toolsfeatures
+from metrics import ganmetrics
 
 # ENSURE REPRODUCIBILITY ######################################################
 #Python/Numpy
@@ -24,17 +33,10 @@ random.seed(12345)
 #K.set_session(sess)
 ###############################################################################
 
-#from keras import Model
-#from keras.optimizers import Adam
-#import keras.layers as kls
-#import keras
-
-#%% TEST PARAMETERS:
-
 
 #%% Load dataset
 
-with open('./data/generated_noise.pkl','rb') as file:
+with open('./data/dualmyo_generated_noise.pkl','rb') as file:
     data = pickle.load(file)
 
     

@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul  4 11:32:33 2018
+visualization_features.py
 
-@author: simao
+Script to produce visualizations of the features used for the GAN discriminator 
+tests.
+
+Author: Miguel Simão (miguel.simao@uc.pt)
 """
 
 
 import numpy as np
-from dataset.dualmyo.utils import Loader
-from dataset.dualmyo import dualmyofeatures
-import toolsfeatures
+
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
@@ -27,7 +28,9 @@ random.seed(12345)
 ###############################################################################
 
 import keras
-import toolsfeatures
+from tools import toolsfeatures
+from dataset.dualmyo.utils import Loader
+from dataset.dualmyo import dualmyofeatures
 
 #%% LOAD DATA
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 13 17:19:33 2018
+dualmyo_gan_generator_train.py
 
-@author: simao
+Script to run the GAN training algorithm on the UC2018 DualMyo data set.
+
+Author: Miguel Simão (miguel.simao@uc.pt)
 """
 
 import numpy as np
@@ -11,11 +13,9 @@ import time
 import pickle
 import matplotlib.pyplot as plt
 
-from dataset.dualmyo.utils import Loader, SynteticSequences
+from dataset.dualmyo.utils import Loader
 from dataset.dualmyo import dualmyofeatures
-from tools import toolstimeseries as tts
 from tools import toolsfeatures
-from tools.postprocessing import PostProcessor
 
 from sklearn import preprocessing
 
@@ -39,10 +39,6 @@ K.set_session(sess)
 
 from classifiers import ACGAN
 from metrics import ganmetrics
-import keras
-from keras import Model
-from keras.optimizers import Adam
-import keras.layers as kls
 
 #%% LOAD DATA
 
@@ -106,11 +102,6 @@ g_loss_w = [1.3, .8]
 epochs = 300
 runid = 0
 
-# Noise:
-#if par_noise:
-#    gan = ACGAN(batch_size=64, num_classes=7, gesture_size=16, latent_dim=8, label_noise=[.9,1.0])
-#else:
-#    gan = ACGAN(batch_size=64, num_classes=7, gesture_size=16, latent_dim=8)
 gan = ACGAN(batch_size=batch_size, num_classes=7, gesture_size=16, latent_dim=8, 
             label_noise=[.9,1.0], d_lr=.0002, g_lr=.001, g_loss_weights=[1.3, 0.8])
 
@@ -223,7 +214,6 @@ for row_ind in range(axs.shape[0]):
 #                  epochs,d_lr,g_lr,g_loss_w[0],g_loss_w[1]))
 fig.show()
 fig.savefig('samples.pdf', bbox_inches = 'tight')
-#    fig.savefig('gan%03i.%04i.png' % (0, ep))
 
 
 #%% SAVE
