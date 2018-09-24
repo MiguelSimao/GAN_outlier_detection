@@ -10,6 +10,15 @@ This is a way of solving the issue of classification of out-of-vocabulary gestur
 Use the file **dualmyo_gan_generator_train.py** to train the generator and discriminator networks. The networks can then be tested with the scripts on **tests_discriminator.py** and **tests_generator.py**.  The description of the methodology is to be published soon.
 
 The networks are implemented in [Keras](https://github.com/keras-team/keras). Aditional libraries used are: numpy, scikit-learn and tensorflow.
+
+## Datasets
+The relevant datasets are the following:
+
+ 1. [UC2018 DualMyo](https://zenodo.org/record/1320922)
+ 2. [UC2017 Static and Dynamic Hand Gestures](https://zenodo.org/record/1319659)
+
+ 
+
 ## Contributors
 
 Miguel Simão:
