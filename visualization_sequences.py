@@ -10,8 +10,8 @@ Created on Wed Jul  4 11:32:33 2018
 import numpy as np
 from dataset.dualmyo.utils import Loader, SynteticSequences
 from dataset.dualmyo import dualmyofeatures
-import toolsfeatures
-import toolstimeseries as tts
+from tools import toolsfeatures
+from tools import toolstimeseries as tts
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE

@@ -7,7 +7,7 @@ Created on Mon Jun 18 09:30:57 2018
 """
 
 import numpy as np
-import toolsfeatures
+from tools import toolsfeatures
 import keras.layers as kls
 from keras import Model, regularizers
 from keras.optimizers import Adam, SGD
